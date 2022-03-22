@@ -1,0 +1,5 @@
+export const CartActionTypes = {
+  SET_HIDDEN: '[CART] SET HIDDEN',
+  TOGGLE_HIDDEN: '[CART] TOGGLE HIDDEN',
+  ADD_CART_ITEM: '[CART] ADD CART ITEM',
+}

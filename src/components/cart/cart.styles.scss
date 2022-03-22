@@ -1,0 +1,20 @@
+.cart-icon {
+  width: 30px;
+}
+
+.cart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  font-weight: bold;
+}
+
+.cart-icon {
+  margin-top: -8px;
+}
