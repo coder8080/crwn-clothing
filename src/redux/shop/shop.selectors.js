@@ -4,7 +4,7 @@ const selectShop = (state) => state.shop
 
 export const selectCollections = createSelector(
   [selectShop],
-  (shop) => shop.collections
+  (shop) => shop.collections ?? []
 )
 
 export const selectCollectionsArray = createSelector(
@@ -13,7 +13,6 @@ export const selectCollectionsArray = createSelector(
 )
 
 export const selectCollection = (collectionName) =>
-  createSelector(
-    [selectCollections],
-    (collections) => collections[collectionName]
+  createSelector([selectCollections], (collections) =>
+    collections ? collections[collectionName] : null
   )
