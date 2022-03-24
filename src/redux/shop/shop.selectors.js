@@ -1,4 +1,4 @@
-import { createSelector } from "reselect"
+import { createSelector } from 'reselect'
 
 const selectShop = (state) => state.shop
 
@@ -16,3 +16,13 @@ export const selectCollection = (collectionName) =>
   createSelector([selectCollections], (collections) =>
     collections ? collections[collectionName] : null
   )
+
+export const selectIsLoading = createSelector(
+  selectShop,
+  (shop) => shop.isLoading
+)
+
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  (shop) => !!shop.collections
+)
