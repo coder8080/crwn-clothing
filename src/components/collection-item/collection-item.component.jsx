@@ -1,7 +1,7 @@
-import './collection-item.styles.scss'
-import CustomButton from '../custom-button/custom-button.component'
-import { addCartItem } from '../../redux/cart/cart.actions'
-import { connect } from 'react-redux'
+import "./collection-item.styles.scss"
+import CustomButton from "../custom-button/custom-button.component"
+import { addCartItem } from "../../redux/cart/cart.actions"
+import { connect } from "react-redux"
 
 const CollectionItem = ({ id, name, imageUrl, price, addCartItem }) => {
   return (
@@ -21,7 +21,7 @@ const CollectionItem = ({ id, name, imageUrl, price, addCartItem }) => {
       </div>
       <div className="collection-footer">
         <span className="name">{name.toUpperCase()}</span>
-        <span className="price">{price}</span>
+        <span className="price">${price}</span>
       </div>
     </div>
   )
