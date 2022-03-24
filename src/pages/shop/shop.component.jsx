@@ -25,6 +25,11 @@ class ShopPage extends Component {
         this.setState({ loading: false })
       })
   }
+
+  componentWillUnmount() {
+    this.unsubscribeFromSnapshot()
+  }
+
   render() {
     const {
       match: { url },

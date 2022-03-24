@@ -1,19 +1,15 @@
-import FormInput from '../form-input/form-input.component'
-import CustomButton from '../custom-button/custom-button.component'
-import './sign-up.styles.scss'
-import { Component } from 'react'
-import { auth, createUserProfile } from '../../firebase/firebase.utils'
+import FormInput from "../form-input/form-input.component"
+import CustomButton from "../custom-button/custom-button.component"
+import "./sign-up.styles.scss"
+import { Component } from "react"
+import { auth, createUserProfile } from "../../firebase/firebase.utils"
 
 class SignUp extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      displayName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    }
+  state = {
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   }
 
   handleChange = async (e) => {
@@ -36,13 +32,13 @@ class SignUp extends Component {
       )
       await createUserProfile(user, { displayName })
       this.setState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       })
     } catch (e) {
-      console.log('error creating user profile', e)
+      console.log("error creating user profile", e)
     }
   }
 

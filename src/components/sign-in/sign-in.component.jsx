@@ -5,13 +5,9 @@ import "./sign-in.styles.scss"
 import { signInWithGoogle, auth } from "../../firebase/firebase.utils"
 
 class SignIn extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      email: "",
-      password: "",
-    }
+  state = {
+    email: "",
+    password: "",
   }
 
   handleSubmit = async (e) => {
