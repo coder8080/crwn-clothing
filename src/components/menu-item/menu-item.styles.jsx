@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
 const largeMenuItemContainerStyles = css`
   height: 380px;
@@ -40,7 +40,7 @@ export const MenuItemContainer = styled.div`
   margin: 0 7.5px 15px;
   overflow: hidden;
 
-  ${({ size }) => (size === "large" ? largeMenuItemContainerStyles : null)}
+  ${({ size }) => (size === 'large' ? largeMenuItemContainerStyles : null)}
 
   &:hover {
     cursor: pointer;
@@ -57,7 +57,7 @@ export const MenuItemContainer = styled.div`
 `
 
 export const BackgroundImageContainer = styled.div`
-  background-image: url("${({ imageUrl }) => imageUrl}");
+  background-image: url('${({ imageUrl }) => imageUrl}');
   width: 100%;
   height: 100%;
   background-size: cover;

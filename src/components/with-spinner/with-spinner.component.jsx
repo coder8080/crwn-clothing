@@ -1,4 +1,4 @@
-import "./with-spinner.styles.scss"
+import './with-spinner.styles.scss'
 
 const Spinner = () => (
   <div className="spinner-container">
@@ -6,9 +6,7 @@ const Spinner = () => (
   </div>
 )
 
-const withSpinner =
-  (WrappedComponent) =>
-  ({ isLoading, ...otherProps }) =>
-    isLoading ? <Spinner /> : <WrappedComponent {...otherProps} />
+const WithSpinner = (WrappedComponent) => (props) =>
+  props.isLoading ? <Spinner /> : <WrappedComponent {...props} />
 
-export default withSpinner
+export default WithSpinner
