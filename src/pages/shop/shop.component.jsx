@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom'
-import { Component } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -8,26 +8,17 @@ import CollectionPageContainer from '../collection/collection.container'
 import { fetchCollections } from '../../redux/shop/shop.actions'
 import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors'
 
-class ShopPage extends Component {
-  componentDidMount() {
-    const { getCollections } = this.props
+const ShopPage = ({ getCollections, match: { url } }) => {
+  useEffect(() => {
     getCollections()
-  }
+  }, [getCollections])
 
-  render() {
-    const {
-      match: { url },
-    } = this.props
-    return (
-      <div className="shop-page">
-        <Route exact path={`${url}`} component={CollectionsOverviewContainer} />
-        <Route
-          path={`${url}/:collection`}
-          component={CollectionPageContainer}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className="shop-page">
+      <Route exact path={`${url}`} component={CollectionsOverviewContainer} />
+      <Route path={`${url}/:collection`} component={CollectionPageContainer} />
+    </div>
+  )
 }
 
 const mapStateToProps = createStructuredSelector({

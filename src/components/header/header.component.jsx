@@ -1,6 +1,6 @@
-import { ReactComponent as Crwn } from '../../assets/crown.svg'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { ReactComponent as Crwn } from '../../assets/crown.svg'
 
 import Cart from '../cart/cart.component'
 import CartDropdown from '../cart-dropdown/cart-dropdown.component'
