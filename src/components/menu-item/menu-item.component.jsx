@@ -1,5 +1,4 @@
-import React from "react"
-import { withRouter } from "react-router-dom"
+import { useRouteMatch, useHistory } from 'react-router-dom'
 
 import {
   SubtitleSpan,
@@ -7,19 +6,23 @@ import {
   ContentComponent,
   MenuItemContainer,
   BackgroundImageContainer,
-} from "./menu-item.styles"
+} from './menu-item.styles'
 
-const MenuItem = ({ title, imageUrl, size, history, match }) => (
-  <MenuItemContainer
-    size={size}
-    onClick={() => history.push(`${match.url}shop/${title.toLowerCase()}`)}
-  >
-    <BackgroundImageContainer imageUrl={imageUrl} />
-    <ContentComponent>
-      <TitleComponent>{title.toUpperCase()}</TitleComponent>
-      <SubtitleSpan>SHOP NOW</SubtitleSpan>
-    </ContentComponent>
-  </MenuItemContainer>
-)
+const MenuItem = ({ title, imageUrl, size }) => {
+  const history = useHistory()
+  const match = useRouteMatch()
+  return (
+    <MenuItemContainer
+      size={size}
+      onClick={() => history.push(`${match.url}shop/${title.toLowerCase()}`)}
+    >
+      <BackgroundImageContainer imageUrl={imageUrl} />
+      <ContentComponent>
+        <TitleComponent>{title.toUpperCase()}</TitleComponent>
+        <SubtitleSpan>SHOP NOW</SubtitleSpan>
+      </ContentComponent>
+    </MenuItemContainer>
+  )
+}
 
-export default withRouter(MenuItem)
+export default MenuItem

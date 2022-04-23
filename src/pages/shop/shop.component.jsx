@@ -1,17 +1,19 @@
 import { Route } from 'react-router-dom'
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useDispatch } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
 
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container'
 import CollectionPageContainer from '../collection/collection.container'
 import { fetchCollections } from '../../redux/shop/shop.actions'
-import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors'
 
-const ShopPage = ({ getCollections, match: { url } }) => {
+const ShopPage = () => {
+  const dispatch = useDispatch()
+  const { url } = useRouteMatch()
+
   useEffect(() => {
-    getCollections()
-  }, [getCollections])
+    dispatch(fetchCollections())
+  }, [dispatch])
 
   return (
     <div className="shop-page">
@@ -21,12 +23,4 @@ const ShopPage = ({ getCollections, match: { url } }) => {
   )
 }
 
-const mapStateToProps = createStructuredSelector({
-  isCollectionsLoaded: selectIsCollectionsLoaded,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  getCollections: () => dispatch(fetchCollections()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage)
+export default ShopPage

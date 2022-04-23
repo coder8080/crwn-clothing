@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as Crwn } from '../../assets/crown.svg'
 
 import Cart from '../cart/cart.component'
@@ -14,34 +13,31 @@ import {
 } from './header.styles'
 import { signOutStart } from '../../redux/user/user.actions'
 
-const Header = ({ currentUser, hidden, signOut }) => (
-  <HeaderComponent>
-    <LogoContainer to="/">
-      <Crwn className="logo" />
-    </LogoContainer>
-    <OptionsContainer>
-      <OptionLink to="/shop">SHOP</OptionLink>
-      <OptionLink to="/shop">CONTACT</OptionLink>
-      {currentUser ? (
-        <OptionLink as="div" onClick={signOut}>
-          SIGN OUT
-        </OptionLink>
-      ) : (
-        <OptionLink to="/signin">SIGN IN</OptionLink>
-      )}
-      <Cart />
-    </OptionsContainer>
-    {hidden ? null : <CartDropdown />}
-  </HeaderComponent>
-)
+const Header = () => {
+  const currentUser = useSelector(selectCurrentUser)
+  const hidden = useSelector(selectCartHidden)
+  const dispatch = useDispatch()
 
-const mapStateToProps = createStructuredSelector({
-  hidden: selectCartHidden,
-  currentUser: selectCurrentUser,
-})
+  return (
+    <HeaderComponent>
+      <LogoContainer to="/">
+        <Crwn className="logo" />
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/shop">CONTACT</OptionLink>
+        {currentUser ? (
+          <OptionLink as="div" onClick={() => dispatch(signOutStart())}>
+            SIGN OUT
+          </OptionLink>
+        ) : (
+          <OptionLink to="/signin">SIGN IN</OptionLink>
+        )}
+        <Cart />
+      </OptionsContainer>
+      {hidden ? null : <CartDropdown />}
+    </HeaderComponent>
+  )
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(signOutStart()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

@@ -40,7 +40,7 @@ export const MenuItemContainer = styled.div`
   margin: 0 7.5px 15px;
   overflow: hidden;
 
-  ${({ size }) => (size === 'large' ? largeMenuItemContainerStyles : null)}
+  ${({ size }) => (size === 'large' ? largeMenuItemContainerStyles : '')}
 
   &:hover {
     cursor: pointer;
