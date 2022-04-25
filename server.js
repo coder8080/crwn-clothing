@@ -12,11 +12,16 @@ const port = process.env.port || 5000
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+console.log(path.join(__dirname, 'client', 'build'))
+console.log(path.join(__dirname, 'client/build'))
+console.log(path.join(__dirname, 'client/build', 'index.html'))
+console.log(path.join(__dirname, 'client', 'build', 'index.html'))
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')))
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__diraname, 'client', 'build', 'index.html'))
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   })
 }
 
@@ -37,6 +42,7 @@ app.post('/payment', (req, res) => {
 
 app.listen(port, (err) => {
   console.log('error starting server')
+  console.log(err)
   if (err) throw err
   console.log(`server was successfully started on port ${port}`)
 })
