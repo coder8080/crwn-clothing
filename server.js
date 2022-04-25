@@ -7,15 +7,10 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const app = express()
-const port = process.env.port || 5000
+const port = process.env.PORT || 5000
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-console.log(path.join(__dirname, 'client', 'build'))
-console.log(path.join(__dirname, 'client/build'))
-console.log(path.join(__dirname, 'client/build', 'index.html'))
-console.log(path.join(__dirname, 'client', 'build', 'index.html'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')))
@@ -40,9 +35,12 @@ app.post('/payment', (req, res) => {
   })
 })
 
+console.log(`Start in ${process.env.NODE_ENV || 'development'} mode`)
 app.listen(port, (err) => {
-  console.log('error starting server')
-  console.log(err)
-  if (err) throw err
+  if (err) {
+    console.log('error starting server')
+    console.log(err)
+    throw err
+  }
   console.log(`server was successfully started on port ${port}`)
 })
