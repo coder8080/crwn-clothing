@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components'
 
 const googleSignInStyles = css`
   background-color: #4285f4;
@@ -13,6 +13,7 @@ const googleSignInStyles = css`
 const basicStyles = css`
   background-color: black;
   color: white;
+  overflow: hidden;
 
   &:hover {
     background-color: white;
@@ -29,7 +30,7 @@ export const CustomButtonContainer = styled.button`
   padding: 0 35px 0 35px;
   font-size: 15px;
   text-transform: uppercase;
-  font-family: "Open Sans Condensed";
+  font-family: 'Open Sans Condensed';
   font-weight: bolder;
   border: none;
   cursor: pointer;
