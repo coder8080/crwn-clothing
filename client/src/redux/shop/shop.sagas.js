@@ -1,4 +1,5 @@
 import { takeEvery as takeLatest, call, put, all } from 'redux-saga/effects'
+import { query, collection, getDocs } from 'firebase/firestore'
 
 import ShopActionTypes from './shop.types'
 import {
@@ -14,8 +15,8 @@ import {
 export function* fetchCollectionsAsync() {
   yield put(getCollectionsStart())
   try {
-    const collectionRef = firestore.collection('collections')
-    const snapshot = yield collectionRef.get()
+    const q = yield query(collection(firestore, 'collections'))
+    const snapshot = yield getDocs(q)
     const collectionsMap = yield call(convertCollectionsSnapshotToMap, snapshot)
     yield put(getCollectionsSuccess(collectionsMap))
   } catch (e) {
