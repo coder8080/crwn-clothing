@@ -32,6 +32,8 @@
   "homepage": "https://github.com/coder8080/crwn-clothing#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "compress": "^0.99.0",
+    "compression": "^1.7.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "stripe": "^8.219.0"
