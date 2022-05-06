@@ -27,6 +27,14 @@ export const ContentComponent = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
+
+  @media screen and (max-width: 300px) {
+    padding: 0 5px;
+  } ;
 `
 
 export const MenuItemContainer = styled.div`

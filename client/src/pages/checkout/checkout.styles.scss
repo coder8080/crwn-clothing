@@ -3,24 +3,21 @@
   margin: 0 auto;
 
   @media screen and (max-width: 800px) {
-    width: 100%
+    width: 100%;
   }
 
   .checkout-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     border-bottom: 1px solid gray;
     padding-bottom: 10px;
 
     .header-block {
-      width: 23%;
       text-transform: capitalize;
       text-align: center;
-
-      &:last-child {
-        width: 8%;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 

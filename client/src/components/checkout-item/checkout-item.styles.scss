@@ -1,28 +1,27 @@
 .checkout-item {
   width: 100%;
   height: 150px;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   border-bottom: 1px solid gray;
 
   .image-container {
-    height: 100%;
-    width: 23%;
+    padding-right: 1em;
 
     img {
-      height: 90%;
+      max-width: 100%;
+      max-height: 100px;
     }
   }
 
   .item-block {
-    width: 23%;
+    flex: 1;
 
     .arrow {
       cursor: pointer;
     }
 
     &:last-child {
-      width: 8%;
       font-weight: bold;
       cursor: pointer;
     }
@@ -33,6 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     font-size: 18px;
   }
 }
