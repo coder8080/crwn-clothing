@@ -27,3 +27,8 @@ export const decreaseCartItem = (item) => ({
 export const clearCart = () => ({
   type: CartActionTypes.CLEAR_CART,
 })
+
+export const setFullCart = (cartItems) => ({
+  type: CartActionTypes.SET_FULL_CART,
+  payload: cartItems,
+})

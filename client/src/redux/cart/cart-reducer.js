@@ -40,6 +40,8 @@ const CartReducer = (state = INITIAL_STATE, { type, payload }) => {
       }
     case CartActionTypes.DECREASE_CART_ITEM:
       return { ...state, cartItems: decreaseCartItem(state.cartItems, payload) }
+    case CartActionTypes.SET_FULL_CART:
+      return { ...state, cartItems: payload }
     default:
       return state
   }
