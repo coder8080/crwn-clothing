@@ -1,9 +1,15 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { signUpStart } from '../../redux/user/user.actions'
+import {
+  selectRegisterError,
+  selectIsRegistering,
+} from '../../redux/user/user.selectors'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
+import Errors from '../errors/errors.component'
+import SmallSpinner from '../small-spinner/small-spinner.component'
 import './sign-up.styles.scss'
 
 const SignUp = () => {
@@ -20,6 +26,9 @@ const SignUp = () => {
     const { name, value } = e.target
     setCredetials((credentials) => ({ ...credentials, [name]: value }))
   }
+
+  const isRegistering = useSelector(selectIsRegistering)
+  const error = useSelector(selectRegisterError)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -47,6 +56,7 @@ const SignUp = () => {
           label="name"
           value={displayName}
           onChange={handleChange}
+          disabled={isRegistering}
         />
         <FormInput
           type="email"
@@ -54,6 +64,7 @@ const SignUp = () => {
           label="email"
           value={email}
           onChange={handleChange}
+          disabled={isRegistering}
         />
         <FormInput
           type="password"
@@ -61,6 +72,7 @@ const SignUp = () => {
           label="password"
           value={password}
           onChange={handleChange}
+          disabled={isRegistering}
         />
         <FormInput
           type="password"
@@ -68,8 +80,13 @@ const SignUp = () => {
           label="confirm password"
           value={confirmPassword}
           onChange={handleChange}
+          disabled={isRegistering}
         />
-        <CustomButton type="submit">SIGN UP</CustomButton>
+        {error ? <Errors errors={[error]} /> : null}
+        <CustomButton type="submit" disabled={isRegistering}>
+          SIGN UP
+        </CustomButton>
+        {isRegistering ? <SmallSpinner /> : null}
       </form>
     </div>
   )

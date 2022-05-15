@@ -15,3 +15,13 @@ export const selectUserError = createSelector(
   [selectUser],
   (user) => user.error
 )
+
+export const selectIsRegistering = createSelector(
+  [selectUser],
+  (user) => user.isRegistering
+)
+
+export const selectRegisterError = createSelector(
+  [selectUser],
+  (user) => user.registerError
+)

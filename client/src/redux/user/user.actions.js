@@ -1,5 +1,26 @@
 import UserActionTypes from './user.types'
 
+const convertErrorToText = (error) => {
+  switch (error.code) {
+    case 'auth/internal-error':
+      return 'Our authorization server is broken. Please retry in a few minutes'
+    case 'auth/invalid-email':
+      return 'Incorrect email address'
+    case 'auth/invalid-password':
+      return 'Invalid password. It has to be at least 6 symbols'
+    case 'auth/wrong-password':
+      return 'Wrong password'
+    case 'auth/email-already-exists':
+      return 'This email is already taken'
+    case 'auth/user-not-found':
+      return 'User with this email is not found'
+    case 'auth/email-already-in-use':
+      return 'This email is already in use. Try to sign in or reset your password'
+    default:
+      return `Unknown auth error: ${error.code}`
+  }
+}
+
 export const setCurrentUser = (user) => ({
   type: UserActionTypes.SET_CURRENT_USER,
   payload: user,
@@ -14,38 +35,10 @@ export const signInSuccess = (user) => ({
   payload: user,
 })
 
-export const signInFailure = (error) => {
-  let errorText = ''
-  console.log({ ...error })
-  console.log(error.name)
-  switch (error.code) {
-    case 'auth/internal-error':
-      errorText =
-        'Our authorization server is broken. Please retry in a few minutes'
-      break
-    case 'auth/invalid-email':
-      errorText = 'Incorrect email address'
-      break
-    case 'auth/invalid-password':
-      errorText = 'Invalid password. It has to be at least 6 symbols'
-      break
-    case 'auth/wrong-password':
-      errorText = 'Wrong password'
-      break
-    case 'auth/email-already-exists':
-      errorText = 'This email is already taken'
-      break
-    case 'auth/user-not-found':
-      errorText = 'User with this email is not found'
-      break
-    default:
-      errorText = `Unknown auth error: ${error.code}`
-  }
-  return {
-    type: UserActionTypes.SIGN_IN_FAILURE,
-    payload: errorText,
-  }
-}
+export const signInFailure = (error) => ({
+  type: UserActionTypes.SIGN_IN_FAILURE,
+  payload: convertErrorToText(error),
+})
 
 export const emailSignInStart = (emailAndPassword) => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,
@@ -79,7 +72,7 @@ export const signUpSuccess = (user) => ({
   payload: user,
 })
 
-export const signUpFailure = (e) => ({
+export const signUpFailure = (error) => ({
   type: UserActionTypes.SIGN_UP_FAILURE,
-  payload: e,
+  payload: convertErrorToText(error),
 })
