@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
+import SmallSpinner from '../small-spinner/small-spinner.component'
+import { selectIsSubmitting } from '../../redux/user/user.selectors'
+import { useSelector } from 'react-redux'
 import {
   googleSignInStart,
   emailSignInStart,
@@ -14,6 +17,8 @@ const SignIn = () => {
   const { email, password } = credentials
 
   const dispatch = useDispatch()
+
+  const isSubmitting = useSelector(selectIsSubmitting)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -39,6 +44,7 @@ const SignIn = () => {
           value={email}
           handleChange={handleChange}
           label="email"
+          disabled={isSubmitting}
           required
         />
         <FormInput
@@ -48,10 +54,12 @@ const SignIn = () => {
           value={password}
           handleChange={handleChange}
           label="password"
+          disabled={isSubmitting}
           required
         />
         <div className="buttons">
           <CustomButton type="submit">Sign in</CustomButton>
+          {isSubmitting ? <SmallSpinner /> : null}
           <CustomButton
             type="button"
             onClick={() => dispatch(googleSignInStart())}

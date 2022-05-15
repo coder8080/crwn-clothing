@@ -3,6 +3,7 @@ import UserActionTypes from './user.types'
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
+  isSubmitting: false,
 }
 
 const userReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -13,6 +14,7 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) => {
         ...state,
         currentUser: payload,
         error: null,
+        isSubmitting: false,
       }
     case UserActionTypes.SIGN_OUT_SUCCESS:
       return {
@@ -28,12 +30,18 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) => {
         error: payload,
       }
     case UserActionTypes.GOOGLE_SIGN_IN_START:
-    case UserActionTypes.EMAIL_SIGN_IN_START:
     case UserActionTypes.SIGN_UP_START:
       return {
         ...state,
         currentUser: null,
         error: null,
+      }
+    case UserActionTypes.EMAIL_SIGN_IN_START:
+      return {
+        ...state,
+        currentUser: null,
+        error: null,
+        isSubmitting: true,
       }
     default:
       return state

@@ -1,8 +1,9 @@
+import SmallSpinner from '../small-spinner/small-spinner.component'
 import './spinner.styles.scss'
 
 const Spinner = () => (
   <div className="spinner-container">
-    <div className="spinner"></div>
+    <SmallSpinner />
   </div>
 )
 
