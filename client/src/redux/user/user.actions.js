@@ -14,10 +14,38 @@ export const signInSuccess = (user) => ({
   payload: user,
 })
 
-export const signInFailure = (error) => ({
-  type: UserActionTypes.SIGN_IN_FAILURE,
-  payload: error,
-})
+export const signInFailure = (error) => {
+  let errorText = ''
+  console.log({ ...error })
+  console.log(error.name)
+  switch (error.code) {
+    case 'auth/internal-error':
+      errorText =
+        'Our authorization server is broken. Please retry in a few minutes'
+      break
+    case 'auth/invalid-email':
+      errorText = 'Incorrect email address'
+      break
+    case 'auth/invalid-password':
+      errorText = 'Invalid password. It has to be at least 6 symbols'
+      break
+    case 'auth/wrong-password':
+      errorText = 'Wrong password'
+      break
+    case 'auth/email-already-exists':
+      errorText = 'This email is already taken'
+      break
+    case 'auth/user-not-found':
+      errorText = 'User with this email is not found'
+      break
+    default:
+      errorText = `Unknown auth error: ${error.code}`
+  }
+  return {
+    type: UserActionTypes.SIGN_IN_FAILURE,
+    payload: errorText,
+  }
+}
 
 export const emailSignInStart = (emailAndPassword) => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,

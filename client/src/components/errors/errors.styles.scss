@@ -1,0 +1,17 @@
+.errors {
+  .error-list {
+    list-style-type: none;
+
+    .error {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        color: red;
+        font-size: 1.5rem;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}

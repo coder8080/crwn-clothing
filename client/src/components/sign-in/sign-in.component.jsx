@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import SmallSpinner from '../small-spinner/small-spinner.component'
-import { selectIsSubmitting } from '../../redux/user/user.selectors'
+import Errors from '../errors/errors.component'
+import {
+  selectIsSubmitting,
+  selectUserError,
+} from '../../redux/user/user.selectors'
 import { useSelector } from 'react-redux'
 import {
   googleSignInStart,
@@ -19,6 +23,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
 
   const isSubmitting = useSelector(selectIsSubmitting)
+  const error = useSelector(selectUserError)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -57,8 +62,11 @@ const SignIn = () => {
           disabled={isSubmitting}
           required
         />
+        {error ? <Errors errors={[error]} /> : null}
         <div className="buttons">
-          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton type="submit" disabled={isSubmitting}>
+            Sign in
+          </CustomButton>
           {isSubmitting ? <SmallSpinner /> : null}
           <CustomButton
             type="button"

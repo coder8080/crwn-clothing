@@ -10,3 +10,8 @@ export const selectIsSubmitting = createSelector(
   [selectUser],
   (user) => user.isSubmitting
 )
+
+export const selectUserError = createSelector(
+  [selectUser],
+  (user) => user.error
+)
