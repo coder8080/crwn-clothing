@@ -18,7 +18,11 @@ export function* fetchCollectionsAsync() {
     const q = yield query(collection(firestore, 'collections'))
     const snapshot = yield getDocs(q)
     const collectionsMap = yield call(convertCollectionsSnapshotToMap, snapshot)
-    yield put(getCollectionsSuccess(collectionsMap))
+    if (Object.entries({ ...collectionsMap }).length !== 0) {
+      yield put(getCollectionsSuccess(collectionsMap))
+    } else {
+      yield put(getCollectionsFailure(true))
+    }
   } catch (e) {
     yield put(getCollectionsFailure(e))
   }

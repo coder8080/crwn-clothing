@@ -31,3 +31,8 @@ export const selectIsCollectionsLoading = createSelector(
   [selectShop],
   (shop) => !shop.collections
 )
+
+export const selectLoadingError = createSelector(
+  [selectShop],
+  (shop) => shop.error
+)
